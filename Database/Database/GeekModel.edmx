@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GeekModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="GeekModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="GeekModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="System_LogEvents" EntityType="GeekModel.Store.System_LogEvents" store:Type="Tables" Schema="dbo" Table="System.LogEvents" />
+          <EntitySet Name="System_Logs" EntityType="GeekModel.Store.System_Logs" store:Type="Tables" Schema="dbo" Table="System.Logs" />
+          <EntitySet Name="System_Services" EntityType="GeekModel.Store.System_Services" store:Type="Tables" Schema="dbo" Table="System.Services" />
+          <AssociationSet Name="FK_System_Logs_System_LogEvents" Association="GeekModel.Store.FK_System_Logs_System_LogEvents">
+            <End Role="System_LogEvents" EntitySet="System_LogEvents" />
+            <End Role="System_Logs" EntitySet="System_Logs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_System_Logs_System_Services" Association="GeekModel.Store.FK_System_Logs_System_Services">
+            <End Role="System_Services" EntitySet="System_Services" />
+            <End Role="System_Logs" EntitySet="System_Logs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="System_LogEvents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="EventName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="EnableLog" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="System_Logs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceId" Type="int" Nullable="false" />
+          <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EventDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="System_Services">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_System_Logs_System_LogEvents">
+          <End Role="System_LogEvents" Type="GeekModel.Store.System_LogEvents" Multiplicity="1" />
+          <End Role="System_Logs" Type="GeekModel.Store.System_Logs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="System_LogEvents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="System_Logs">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_System_Logs_System_Services">
+          <End Role="System_Services" Type="GeekModel.Store.System_Services" Multiplicity="1" />
+          <End Role="System_Logs" Type="GeekModel.Store.System_Logs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="System_Services">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="System_Logs">
+              <PropertyRef Name="ServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GeekModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="GeekEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="GeekModel.sysdiagram" />
+          <EntitySet Name="System_LogEvents" EntityType="GeekModel.System_LogEvents" />
+          <EntitySet Name="System_Services" EntityType="GeekModel.System_Services" />
+          <EntitySet Name="System_Logs" EntityType="GeekModel.System_Logs" />
+          <AssociationSet Name="FK_System_Logs_System_LogEvents" Association="GeekModel.FK_System_Logs_System_LogEvents">
+            <End Role="System_LogEvents" EntitySet="System_LogEvents" />
+            <End Role="System_Logs" EntitySet="System_Logs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_System_Logs_System_Services" Association="GeekModel.FK_System_Logs_System_Services">
+            <End Role="System_Services" EntitySet="System_Services" />
+            <End Role="System_Logs" EntitySet="System_Logs" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="System_LogEvents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="EventName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="EnableLog" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="System_Logs" Relationship="GeekModel.FK_System_Logs_System_LogEvents" FromRole="System_LogEvents" ToRole="System_Logs" />
+        </EntityType>
+        <EntityType Name="System_Services">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="System_Logs" Relationship="GeekModel.FK_System_Logs_System_Services" FromRole="System_Services" ToRole="System_Logs" />
+        </EntityType>
+        <EntityType Name="System_Logs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ServiceId" Nullable="false" />
+          <Property Type="Int32" Name="EventId" Nullable="false" />
+          <Property Type="String" Name="Message" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="EventDate" Nullable="false" Precision="3" />
+          <NavigationProperty Name="System_LogEvents" Relationship="GeekModel.FK_System_Logs_System_LogEvents" FromRole="System_Logs" ToRole="System_LogEvents" />
+          <NavigationProperty Name="System_Services" Relationship="GeekModel.FK_System_Logs_System_Services" FromRole="System_Logs" ToRole="System_Services" />
+        </EntityType>
+        <Association Name="FK_System_Logs_System_LogEvents">
+          <End Type="GeekModel.System_LogEvents" Role="System_LogEvents" Multiplicity="1" />
+          <End Type="GeekModel.System_Logs" Role="System_Logs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="System_LogEvents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="System_Logs">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_System_Logs_System_Services">
+          <End Type="GeekModel.System_Services" Role="System_Services" Multiplicity="1" />
+          <End Type="GeekModel.System_Logs" Role="System_Logs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="System_Services">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="System_Logs">
+              <PropertyRef Name="ServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GeekModelStoreContainer" CdmEntityContainer="GeekEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="GeekModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="System_LogEvents">
+            <EntityTypeMapping TypeName="GeekModel.System_LogEvents">
+              <MappingFragment StoreEntitySet="System_LogEvents">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="EnableLog" ColumnName="EnableLog" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="System_Services">
+            <EntityTypeMapping TypeName="GeekModel.System_Services">
+              <MappingFragment StoreEntitySet="System_Services">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="System_Logs">
+            <EntityTypeMapping TypeName="GeekModel.System_Logs">
+              <MappingFragment StoreEntitySet="System_Logs">
+                <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
