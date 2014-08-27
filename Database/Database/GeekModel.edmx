@@ -46,6 +46,7 @@
           <Property Name="EventId" Type="int" Nullable="false" />
           <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
           <Property Name="EventDate" Type="datetime" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="System_Services">
           <Key>
@@ -134,6 +135,7 @@
           <Property Type="DateTime" Name="EventDate" Nullable="false" Precision="3" />
           <NavigationProperty Name="System_LogEvents" Relationship="GeekModel.FK_System_Logs_System_LogEvents" FromRole="System_Logs" ToRole="System_LogEvents" />
           <NavigationProperty Name="System_Services" Relationship="GeekModel.FK_System_Logs_System_Services" FromRole="System_Logs" ToRole="System_Services" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
         </EntityType>
         <Association Name="FK_System_Logs_System_LogEvents">
           <End Type="GeekModel.System_LogEvents" Role="System_LogEvents" Multiplicity="1" />
@@ -196,6 +198,7 @@
           <EntitySetMapping Name="System_Logs">
             <EntityTypeMapping TypeName="GeekModel.System_Logs">
               <MappingFragment StoreEntitySet="System_Logs">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="EventDate" ColumnName="EventDate" />
                 <ScalarProperty Name="Message" ColumnName="Message" />
                 <ScalarProperty Name="EventId" ColumnName="EventId" />

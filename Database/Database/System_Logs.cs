@@ -19,6 +19,7 @@ namespace Database
         public int EventId { get; set; }
         public string Message { get; set; }
         public System.DateTime EventDate { get; set; }
+        public int UserId { get; set; }
     
         public virtual System_LogEvents System_LogEvents { get; set; }
         public virtual System_Services System_Services { get; set; }

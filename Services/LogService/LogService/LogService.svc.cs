@@ -60,7 +60,7 @@ namespace LogService
                         EventId = logEvent.Id,
                         Message = message.Message,
                         EventDate = DateTime.Now,
-                       // userid=message.UserId
+                        UserId = message.UserId
                     });
 
                 try

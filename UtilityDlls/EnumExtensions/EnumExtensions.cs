@@ -22,7 +22,7 @@ namespace EnumExtensions
                 if (attributes != null && attributes.Length > 0)
                     return ((EnumText) attributes[0]).Value;
             }
-            throw new ArgumentException("Enum " + e.ToString() + " has no EnumText defined!");
+            return "";
         }
         /// <summary>
         /// Получить значение из атрибута перечисления
@@ -42,7 +42,7 @@ namespace EnumExtensions
                 if (attributes != null && attributes.Length > 0)
                     return ((EnumValue) attributes[0]).Value;
             }
-            throw new ArgumentException("Enum " + e.ToString() + " has no EnumText defined!");
+            return 0;
         }
     }
 }

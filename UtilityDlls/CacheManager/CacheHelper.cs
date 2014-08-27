@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using System.Runtime.Caching;
 using EnumExtensions;
 
@@ -125,6 +127,57 @@ namespace CacheManager
             return GetCacheElement<TResponce>(nameString);
         }
         #endregion
-      
+
+
+        #region Remove
+        /// <summary>
+        /// Удалить элемент из кэша
+        /// </summary>
+        /// <param name="name">Имя объекта в кэше</param>
+        public static void RemoveCacheElement(string name)
+        {
+            if (name != null)
+                Cache.Remove(name);
+        }
+
+        /// <summary>
+        /// Удалить элемент из кэша
+        /// </summary>
+        /// <param name="name">Имя объекта в кэше</param>
+        public static void RemoveCacheElement(CacheNameManager name)
+        {
+            Cache.Remove(name.GetEnumText());
+        }
+
+        /// <summary>
+        /// Очистить кэш 
+        /// </summary>
+        public static void ClearAll()
+        {
+            var cacheKeys = MemoryCache.Default.Select(kvp => kvp.Key).ToList();
+            foreach (var cacheKey in cacheKeys)
+            {
+                RemoveCacheElement(cacheKey);
+            }
+        }
+
+        /// <summary>
+        /// Удалить элементы в кэше имя которых содержит текст
+        /// </summary>
+        /// <param name="text">текст на проверку вхождение в имя элемента</param>
+        public static void RemoveContainsNameCacheElement(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+                return;
+            var cacheKeys = MemoryCache.Default.Select(kvp => kvp.Key).Where(p => p.Contains(text)).ToList();
+            foreach (var cacheKey in cacheKeys)
+            {
+                RemoveCacheElement(cacheKey);
+            }
+        }
+
+        #endregion
+
+
     }
 }
