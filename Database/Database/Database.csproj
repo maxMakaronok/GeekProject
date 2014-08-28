@@ -74,6 +74,9 @@
     <Compile Include="System_Services.cs">
       <DependentUpon>GeekModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>GeekModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="GeekModel.edmx">

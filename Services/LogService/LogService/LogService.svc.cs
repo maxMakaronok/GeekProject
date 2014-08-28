@@ -28,7 +28,7 @@ namespace LogService
             _database.Dispose();
         }
 
-        public void WriteLogMessage(LogMessage message)
+        public void WriteLogMessage(LogAddMessage addMessage)
         {
             #region  Достаем все события из кэша
             var logEvents = CacheHelper.GetCacheElement<List<System_LogEvents>>(CacheNameManager.Core_LogEventsList);
@@ -48,7 +48,7 @@ namespace LogService
             }
             #endregion
 
-            var logEvent = logEvents.FirstOrDefault(p => p.Id == message.EventType);
+            var logEvent = logEvents.FirstOrDefault(p => p.Id == addMessage.EventType);
 
             #region Работа с БД
             if (logEvent != null && logEvent.EnableLog && _enableDBLogger)
@@ -56,11 +56,11 @@ namespace LogService
 
                 _database.System_Logs.Add(new System_Logs()
                     {
-                        ServiceId = message.ServiceId,
+                        ServiceId = addMessage.ServiceId,
                         EventId = logEvent.Id,
-                        Message = message.Message,
+                        Message = addMessage.Message,
                         EventDate = DateTime.Now,
-                        UserId = message.UserId
+                        UserId = addMessage.UserId
                     });
 
                 try
@@ -79,10 +79,46 @@ namespace LogService
             if (logEvent != null && logEvent.EnableLog && _enableFileLogger)
             {
                 var type = (logEvent.Id == 1) ? TraceEventType.Error : TraceEventType.Information;
-                LogWriter.Write(message.Message, type, message.LogPath);
+                LogWriter.Write(addMessage.Message, type, addMessage.LogPath);
             }
             #endregion
         }
 
+        public List<LogGetMessage> GetLogs(LogFilter filter)
+        {
+            var messages = new List<LogGetMessage>();
+
+            var systemLogs = _database.System_Logs.Select(p=>p);
+
+            if (filter.EventId.HasValue)
+                systemLogs=systemLogs.Where(p => p.EventId == filter.EventId.Value);
+
+            if(filter.ServiceId.HasValue)
+                systemLogs = systemLogs.Where(p => p.ServiceId == filter.ServiceId.Value);
+
+            if (filter.Skip.HasValue)
+                systemLogs = systemLogs.Skip(filter.Skip.Value);
+
+            if (filter.Take.HasValue)
+                systemLogs = systemLogs.Take(filter.Take.Value);
+
+            try
+            {
+                messages.AddRange(systemLogs.Select(systemLog => new LogGetMessage
+                {
+                    ItemId = systemLog.Id,
+                    EventName = systemLog.System_LogEvents.EventName,
+                    EventDate = systemLog.EventDate,
+                    ServiceName = systemLog.System_Services.Name,
+                    Message = systemLog.Message,
+                    UserLogin = systemLog.User.tempFieldLogin
+                }));
+            }
+            catch
+            {
+               
+            }
+            return messages;
+        }
     }
 }

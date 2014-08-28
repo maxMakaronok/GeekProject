@@ -11,6 +11,8 @@
         <EntityTypeShape EntityType="GeekModel.System_Logs" Width="1.5" PointX="4.9976121471252348" PointY="20.338323125773261" />
         <AssociationConnector Association="GeekModel.FK_System_Logs_System_LogEvents" />
         <AssociationConnector Association="GeekModel.FK_System_Logs_System_Services" />
+        <EntityTypeShape EntityType="GeekModel.User" Width="1.5" PointX="4.5856343249723475" PointY="26.806173232759431" />
+        <AssociationConnector Association="GeekModel.FK_System_Logs_Users" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

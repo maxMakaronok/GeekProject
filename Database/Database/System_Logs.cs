@@ -23,5 +23,6 @@ namespace Database
     
         public virtual System_LogEvents System_LogEvents { get; set; }
         public virtual System_Services System_Services { get; set; }
+        public virtual User User { get; set; }
     }
 }

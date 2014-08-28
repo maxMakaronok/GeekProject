@@ -40,14 +40,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LogMessage.cs" />
+    <Compile Include="LogFilter.cs" />
+    <Compile Include="LogAddMessage.cs" />
+    <Compile Include="LogGetMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Database\Database\Database.csproj">
+      <Project>{511FF87F-816B-4E08-AD9E-34E87F09EBBF}</Project>
+      <Name>Database %28Database\Database%29</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Enums\Enums.csproj">
       <Project>{9875E142-8E8E-47A3-A26F-F7C1D78D60A4}</Project>
       <Name>Enums</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

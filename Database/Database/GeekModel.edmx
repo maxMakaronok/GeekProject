@@ -10,12 +10,17 @@
           <EntitySet Name="System_LogEvents" EntityType="GeekModel.Store.System_LogEvents" store:Type="Tables" Schema="dbo" Table="System.LogEvents" />
           <EntitySet Name="System_Logs" EntityType="GeekModel.Store.System_Logs" store:Type="Tables" Schema="dbo" Table="System.Logs" />
           <EntitySet Name="System_Services" EntityType="GeekModel.Store.System_Services" store:Type="Tables" Schema="dbo" Table="System.Services" />
+          <EntitySet Name="Users" EntityType="GeekModel.Store.Users" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_System_Logs_System_LogEvents" Association="GeekModel.Store.FK_System_Logs_System_LogEvents">
             <End Role="System_LogEvents" EntitySet="System_LogEvents" />
             <End Role="System_Logs" EntitySet="System_Logs" />
           </AssociationSet>
           <AssociationSet Name="FK_System_Logs_System_Services" Association="GeekModel.Store.FK_System_Logs_System_Services">
             <End Role="System_Services" EntitySet="System_Services" />
+            <End Role="System_Logs" EntitySet="System_Logs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_System_Logs_Users" Association="GeekModel.Store.FK_System_Logs_Users">
+            <End Role="Users" EntitySet="Users" />
             <End Role="System_Logs" EntitySet="System_Logs" />
           </AssociationSet>
         </EntityContainer>
@@ -55,6 +60,16 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="FullName" Type="nvarchar(max)" StoreGeneratedPattern="Computed" />
+          <Property Name="tempFieldLogin" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <Association Name="FK_System_Logs_System_LogEvents">
           <End Role="System_LogEvents" Type="GeekModel.Store.System_LogEvents" Multiplicity="1" />
           <End Role="System_Logs" Type="GeekModel.Store.System_Logs" Multiplicity="*" />
@@ -79,6 +94,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_System_Logs_Users">
+          <End Role="Users" Type="GeekModel.Store.Users" Multiplicity="1" />
+          <End Role="System_Logs" Type="GeekModel.Store.System_Logs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="System_Logs">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -94,6 +121,11 @@
           </AssociationSet>
           <AssociationSet Name="FK_System_Logs_System_Services" Association="GeekModel.FK_System_Logs_System_Services">
             <End Role="System_Services" EntitySet="System_Services" />
+            <End Role="System_Logs" EntitySet="System_Logs" />
+          </AssociationSet>
+          <EntitySet Name="Users" EntityType="GeekModel.User" />
+          <AssociationSet Name="FK_System_Logs_Users" Association="GeekModel.FK_System_Logs_Users">
+            <End Role="User" EntitySet="Users" />
             <End Role="System_Logs" EntitySet="System_Logs" />
           </AssociationSet>
           </EntityContainer>
@@ -136,6 +168,7 @@
           <NavigationProperty Name="System_LogEvents" Relationship="GeekModel.FK_System_Logs_System_LogEvents" FromRole="System_Logs" ToRole="System_LogEvents" />
           <NavigationProperty Name="System_Services" Relationship="GeekModel.FK_System_Logs_System_Services" FromRole="System_Logs" ToRole="System_Services" />
           <Property Type="Int32" Name="UserId" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="GeekModel.FK_System_Logs_Users" FromRole="System_Logs" ToRole="User" />
         </EntityType>
         <Association Name="FK_System_Logs_System_LogEvents">
           <End Type="GeekModel.System_LogEvents" Role="System_LogEvents" Multiplicity="1" />
@@ -158,6 +191,29 @@
             </Principal>
             <Dependent Role="System_Logs">
               <PropertyRef Name="ServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Type="Int32" Name="UserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="FirstName" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LastName" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FullName" MaxLength="Max" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Type="String" Name="tempFieldLogin" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="System_Logs" Relationship="GeekModel.FK_System_Logs_Users" FromRole="User" ToRole="System_Logs" />
+        </EntityType>
+        <Association Name="FK_System_Logs_Users">
+          <End Type="GeekModel.User" Role="User" Multiplicity="1" />
+          <End Type="GeekModel.System_Logs" Role="System_Logs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="System_Logs">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -204,6 +260,17 @@
                 <ScalarProperty Name="EventId" ColumnName="EventId" />
                 <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="GeekModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="tempFieldLogin" ColumnName="tempFieldLogin" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

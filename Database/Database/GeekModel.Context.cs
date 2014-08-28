@@ -29,5 +29,6 @@ namespace Database
         public DbSet<System_LogEvents> System_LogEvents { get; set; }
         public DbSet<System_Services> System_Services { get; set; }
         public DbSet<System_Logs> System_Logs { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }
