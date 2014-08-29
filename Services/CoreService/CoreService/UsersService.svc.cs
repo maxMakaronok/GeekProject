@@ -10,6 +10,7 @@ using Database;
 using EnumExtensions;
 using Enums.Security;
 using Helper;
+using LogServiceProxy.LogService;
 using ServiceModels.Extensions;
 using ServiceModels.RolesAndTasks;
 
@@ -18,14 +19,25 @@ namespace CoreService
     public class UsersService : IUsersService
     {
         private readonly GeekEntities _database;
+        private readonly LogServiceClient _logClient;
+
+
         public UsersService()
         {
             _database=new GeekEntities();
+            _logClient = new LogServiceClient();
         }
         ~UsersService()
         {
-            //закрываем соединение с базой
             _database.Dispose();
+            try
+            {
+                _logClient.Close();
+            }
+            catch (Exception)
+            {
+               _logClient.Abort();
+            }
         }
         
         public List<TaskModel> GetAllTasks()
@@ -72,7 +84,7 @@ namespace CoreService
 
         public List<RoleModel> GetUserRoles(int userId)
         {
-            var cachName = CacheNameManager.Core_UserRoles.GetEnumText() + userId;
+            var cachName = CacheNameManager.Common_UserRoles.GetEnumText() + userId;
             var roles = CacheHelper.GetCacheElement<List<RoleModel>>(cachName);
 
             if (!roles.ReturnSuccess())
@@ -88,7 +100,7 @@ namespace CoreService
 
         public List<TaskModel> GetUserTasks(int userId)
         {
-            var cachName = CacheNameManager.Core_UserTasks.GetEnumText() + userId;
+            var cachName = CacheNameManager.Common_UserTasks.GetEnumText() + userId;
             var tasks = CacheHelper.GetCacheElement<List<TaskModel>>(cachName);
 
             if (!tasks.ReturnSuccess())
@@ -102,34 +114,40 @@ namespace CoreService
             return tasks;
         }
 
-        public bool IsUserInRole(int userId, RolesEnum role)
+        public bool IsUserInRole(int userId, int role)
         {
-            return IsUserInRoles(userId, new List<RolesEnum>()
+            return IsUserInRoles(userId, new List<int>()
                                              {
                                                  role
                                              });
         }
 
-        public bool IsUserInRoles(int userId, List<RolesEnum> roles)
+        public bool IsUserWithLoginInRole(string login, int role)
+        {
+            var user = _database.Users.FirstOrDefault(p => p.Login == login || p.Email == login);
+            return user != null && IsUserInRole(user.UserId, role);
+        }
+
+        public bool IsUserInRoles(int userId, List<int> roles)
         {
             var userRoles = GetUserRoles(userId).Select(p=>p.RoleId).ToArray();
             //имеет хотя бы одну роль из перечисленных
-            return  roles.Any(role => userRoles.Contains(role.GetEnumValue()));
+            return  roles.Any(userRoles.Contains);
         }
 
-        public bool IsTaskAllowForUser(int userId, TasksEnum task)
+        public bool IsTaskAllowForUser(int userId, int task)
         {
-            return IsTasksAllowForUser(userId, new List<TasksEnum>()
+            return IsTasksAllowForUser(userId, new List<int>()
                                              {
                                                  task
                                              });
         }
 
-        public bool IsTasksAllowForUser(int userId, List<TasksEnum> tasks)
+        public bool IsTasksAllowForUser(int userId, List<int> tasks)
         {
             var userTasks = GetUserTasks(userId).Select(p => p.TaskId).ToArray();
             //имеет хотя бы одну роль из перечисленных
-            return tasks.Any(task => userTasks.Contains(task.GetEnumValue()));
+            return tasks.Any(userTasks.Contains);
         }
 
         public void UpdateUserRolesAndTask(int userId,List<int> newRoles, List<int> newTasks)
@@ -137,7 +155,7 @@ namespace CoreService
             if (newRoles.Any())
             {
                 var oldRoles = GetUserRoles(userId).Select(p=>p.RoleId).ToArray();
-                CacheHelper.RemoveCacheElement(CacheNameManager.Core_UserRoles.GetEnumText()+userId);
+                CacheHelper.RemoveCacheElement(CacheNameManager.Common_UserRoles.GetEnumText()+userId);
 
                 var rolesIdToAdd = newRoles.Where(p => !oldRoles.Contains(p)).ToArray();
                 var rolesIdToRemove = oldRoles.Where(p => !newRoles.Contains(p)).ToArray();
@@ -162,7 +180,7 @@ namespace CoreService
             if (newTasks.Any())
             {
                 var oldTasks = GetUserTasks(userId).Select(p => p.TaskId).ToArray();
-                CacheHelper.RemoveCacheElement(CacheNameManager.Core_UserTasks.GetEnumText() + userId);
+                CacheHelper.RemoveCacheElement(CacheNameManager.Common_UserTasks.GetEnumText() + userId);
 
                 var tasksIdToAdd = newTasks.Where(p => !oldTasks.Contains(p)).ToArray();
                 var tasksIdToRemove = oldTasks.Where(p => !newTasks.Contains(p)).ToArray();

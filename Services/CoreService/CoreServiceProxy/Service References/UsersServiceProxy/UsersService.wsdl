@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="UsersService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:2908/UsersService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:2908/UsersService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:2908/UsersService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ServiceModels.RolesAndTasks" />
+      <xsd:import schemaLocation="http://localhost:2908/UsersService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IUsersService_GetAllTasks_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllTasks" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_GetAllTasks_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllTasksResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_GetAllRoles_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRoles" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_GetAllRoles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRolesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_GetAllRoleTasks_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRoleTasks" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_GetAllRoleTasks_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRoleTasksResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_GetUserRoles_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserRoles" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_GetUserRoles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserRolesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_GetUserTasks_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserTasks" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_GetUserTasks_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserTasksResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_IsUserInRole_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsUserInRole" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_IsUserInRole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsUserInRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_IsUserWithLoginInRole_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsUserWithLoginInRole" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_IsUserWithLoginInRole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsUserWithLoginInRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_IsUserInRoles_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsUserInRoles" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_IsUserInRoles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsUserInRolesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_IsTaskAllowForUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsTaskAllowForUser" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_IsTaskAllowForUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsTaskAllowForUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_IsTasksAllowForUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsTasksAllowForUser" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_IsTasksAllowForUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsTasksAllowForUserResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IUsersService">
+    <wsdl:operation name="GetAllTasks">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersService/GetAllTasks" message="tns:IUsersService_GetAllTasks_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersService/GetAllTasksResponse" message="tns:IUsersService_GetAllTasks_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRoles">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersService/GetAllRoles" message="tns:IUsersService_GetAllRoles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersService/GetAllRolesResponse" message="tns:IUsersService_GetAllRoles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRoleTasks">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersService/GetAllRoleTasks" message="tns:IUsersService_GetAllRoleTasks_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersService/GetAllRoleTasksResponse" message="tns:IUsersService_GetAllRoleTasks_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserRoles">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersService/GetUserRoles" message="tns:IUsersService_GetUserRoles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersService/GetUserRolesResponse" message="tns:IUsersService_GetUserRoles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserTasks">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersService/GetUserTasks" message="tns:IUsersService_GetUserTasks_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersService/GetUserTasksResponse" message="tns:IUsersService_GetUserTasks_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsUserInRole">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersService/IsUserInRole" message="tns:IUsersService_IsUserInRole_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersService/IsUserInRoleResponse" message="tns:IUsersService_IsUserInRole_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsUserWithLoginInRole">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersService/IsUserWithLoginInRole" message="tns:IUsersService_IsUserWithLoginInRole_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersService/IsUserWithLoginInRoleResponse" message="tns:IUsersService_IsUserWithLoginInRole_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsUserInRoles">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersService/IsUserInRoles" message="tns:IUsersService_IsUserInRoles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersService/IsUserInRolesResponse" message="tns:IUsersService_IsUserInRoles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsTaskAllowForUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersService/IsTaskAllowForUser" message="tns:IUsersService_IsTaskAllowForUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersService/IsTaskAllowForUserResponse" message="tns:IUsersService_IsTaskAllowForUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsTasksAllowForUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersService/IsTasksAllowForUser" message="tns:IUsersService_IsTasksAllowForUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersService/IsTasksAllowForUserResponse" message="tns:IUsersService_IsTasksAllowForUser_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IUsersService" type="tns:IUsersService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAllTasks">
+      <soap:operation soapAction="http://tempuri.org/IUsersService/GetAllTasks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRoles">
+      <soap:operation soapAction="http://tempuri.org/IUsersService/GetAllRoles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRoleTasks">
+      <soap:operation soapAction="http://tempuri.org/IUsersService/GetAllRoleTasks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserRoles">
+      <soap:operation soapAction="http://tempuri.org/IUsersService/GetUserRoles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserTasks">
+      <soap:operation soapAction="http://tempuri.org/IUsersService/GetUserTasks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsUserInRole">
+      <soap:operation soapAction="http://tempuri.org/IUsersService/IsUserInRole" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsUserWithLoginInRole">
+      <soap:operation soapAction="http://tempuri.org/IUsersService/IsUserWithLoginInRole" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsUserInRoles">
+      <soap:operation soapAction="http://tempuri.org/IUsersService/IsUserInRoles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsTaskAllowForUser">
+      <soap:operation soapAction="http://tempuri.org/IUsersService/IsTaskAllowForUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsTasksAllowForUser">
+      <soap:operation soapAction="http://tempuri.org/IUsersService/IsTasksAllowForUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UsersService">
+    <wsdl:port name="BasicHttpBinding_IUsersService" binding="tns:BasicHttpBinding_IUsersService">
+      <soap:address location="http://localhost:2908/UsersService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

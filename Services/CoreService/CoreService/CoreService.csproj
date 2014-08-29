@@ -15,7 +15,7 @@
     <AssemblyName>CoreService</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -107,6 +107,10 @@
       <Project>{663236c0-9727-40c3-a757-91c4bed33ff9}</Project>
       <Name>Helper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\LogService\LogServiceProxy\LogServiceProxy.csproj">
+      <Project>{03c0c2a2-1fc2-4814-8cea-ff97a21079c3}</Project>
+      <Name>LogServiceProxy</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -121,9 +125,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>4277</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:6438/</IISUrl>
+          <IISUrl>http://localhost:2908</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

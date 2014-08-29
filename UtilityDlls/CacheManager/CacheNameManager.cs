@@ -27,11 +27,11 @@ namespace CacheManager
         [EnumText("Core_AllRoleTasks")]
         Core_AllRoleTasks,
 
-        [EnumText("Core_UserRoles")]
-        Core_UserRoles,
+        [EnumText("Common_UserRoles")]
+        Common_UserRoles,
 
-        [EnumText("Core_UserTasks")]
-        Core_UserTasks,
+        [EnumText("Common_UserTasks")]
+        Common_UserTasks,
 
       
         #endregion
