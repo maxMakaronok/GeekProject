@@ -36,5 +36,13 @@ namespace CacheManager
       
         #endregion
 
+        #region Web
+        [EnumText("Web_CurrentUser")]
+        Web_CurrentUser,
+
+
+        #endregion
+
+
     }
 }

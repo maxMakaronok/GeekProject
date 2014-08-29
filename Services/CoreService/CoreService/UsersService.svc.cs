@@ -11,6 +11,7 @@ using EnumExtensions;
 using Enums.Security;
 using Helper;
 using LogServiceProxy.LogService;
+using ServiceModels;
 using ServiceModels.Extensions;
 using ServiceModels.RolesAndTasks;
 
@@ -148,6 +149,49 @@ namespace CoreService
             var userTasks = GetUserTasks(userId).Select(p => p.TaskId).ToArray();
             //имеет хотя бы одну роль из перечисленных
             return tasks.Any(userTasks.Contains);
+        }
+
+        public UserInfo GetUserInfoById(int userId)
+        {
+            var user = _database.Users.FirstOrDefault(p => p.UserId == userId);
+            return user.ReturnSuccess() ? user.ToUserInfo() : null;
+        }
+
+        public UserInfo GetUserInfoByLogin(string login)
+        {
+            var user = _database.Users.FirstOrDefault(p => p.Login == login || p.Email == login);
+            return user.ReturnSuccess() ? user.ToUserInfo() : null;
+        }
+
+        public Error IsValid(string login, string password)
+        {
+            //придумать блоироку по айпи адресу если количество неверных запросов в день более 50
+            var encryptedPassword = DataEncrypter.EncryptSha1(password);
+            var user = _database.Users.FirstOrDefault(p => (p.Login == login || p.Email == login));
+
+            if(!user.ReturnSuccess())
+                return new Error { Code = 4, Message = "Неверный логин или e-mail" };
+
+            if (user.Password != encryptedPassword)
+            {
+                user.ErrorPinCount = user.ErrorPinCount + 1;
+                if (user.ErrorPinCount >= 5)
+                {
+                    user.IsBLocked = true;
+                    user.BlockReason = "Пятикратная ошибка авторизации";
+                    user.BlockDate = DateTime.Now;
+                }
+                _database.SaveChanges();
+
+                return new Error { Code = 4, Message = "Неверные учетные данные" };
+            }
+            if (user.IsBLocked)
+                return new Error { Code = 4, Message = string.Format("Пользователь заблокирован: {0}", user.BlockReason) };
+
+            if (user.isDeleted)
+                return new Error { Code = 4, Message = "Пользователь был удален из системы" };
+
+            return Error.Ok;
         }
 
         public void UpdateUserRolesAndTask(int userId,List<int> newRoles, List<int> newTasks)

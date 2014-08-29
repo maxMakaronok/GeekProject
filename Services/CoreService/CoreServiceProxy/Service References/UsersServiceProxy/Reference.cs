@@ -228,6 +228,227 @@ namespace CoreServiceProxy.UsersServiceProxy {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="UserInfo", Namespace="http://schemas.datacontract.org/2004/07/ServiceModels")]
+    [System.SerializableAttribute()]
+    public partial class UserInfo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> BlockDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string BlockReasonField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ErrorPinCountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FirstNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FullNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsBLockedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime LastLoginDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LastNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LoginField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime RegistrationDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UserIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> BlockDate {
+            get {
+                return this.BlockDateField;
+            }
+            set {
+                if ((this.BlockDateField.Equals(value) != true)) {
+                    this.BlockDateField = value;
+                    this.RaisePropertyChanged("BlockDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string BlockReason {
+            get {
+                return this.BlockReasonField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BlockReasonField, value) != true)) {
+                    this.BlockReasonField = value;
+                    this.RaisePropertyChanged("BlockReason");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email {
+            get {
+                return this.EmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ErrorPinCount {
+            get {
+                return this.ErrorPinCountField;
+            }
+            set {
+                if ((this.ErrorPinCountField.Equals(value) != true)) {
+                    this.ErrorPinCountField = value;
+                    this.RaisePropertyChanged("ErrorPinCount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FirstName {
+            get {
+                return this.FirstNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FirstNameField, value) != true)) {
+                    this.FirstNameField = value;
+                    this.RaisePropertyChanged("FirstName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FullName {
+            get {
+                return this.FullNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FullNameField, value) != true)) {
+                    this.FullNameField = value;
+                    this.RaisePropertyChanged("FullName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsBLocked {
+            get {
+                return this.IsBLockedField;
+            }
+            set {
+                if ((this.IsBLockedField.Equals(value) != true)) {
+                    this.IsBLockedField = value;
+                    this.RaisePropertyChanged("IsBLocked");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime LastLoginDate {
+            get {
+                return this.LastLoginDateField;
+            }
+            set {
+                if ((this.LastLoginDateField.Equals(value) != true)) {
+                    this.LastLoginDateField = value;
+                    this.RaisePropertyChanged("LastLoginDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LastName {
+            get {
+                return this.LastNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LastNameField, value) != true)) {
+                    this.LastNameField = value;
+                    this.RaisePropertyChanged("LastName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Login {
+            get {
+                return this.LoginField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LoginField, value) != true)) {
+                    this.LoginField = value;
+                    this.RaisePropertyChanged("Login");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime RegistrationDate {
+            get {
+                return this.RegistrationDateField;
+            }
+            set {
+                if ((this.RegistrationDateField.Equals(value) != true)) {
+                    this.RegistrationDateField = value;
+                    this.RaisePropertyChanged("RegistrationDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UserId {
+            get {
+                return this.UserIdField;
+            }
+            set {
+                if ((this.UserIdField.Equals(value) != true)) {
+                    this.UserIdField = value;
+                    this.RaisePropertyChanged("UserId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="UsersServiceProxy.IUsersService")]
     public interface IUsersService {
@@ -291,6 +512,18 @@ namespace CoreServiceProxy.UsersServiceProxy {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersService/IsTasksAllowForUser", ReplyAction="http://tempuri.org/IUsersService/IsTasksAllowForUserResponse")]
         System.Threading.Tasks.Task<bool> IsTasksAllowForUserAsync(int userId, int[] tasks);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersService/GetUserInfoById", ReplyAction="http://tempuri.org/IUsersService/GetUserInfoByIdResponse")]
+        CoreServiceProxy.UsersServiceProxy.UserInfo GetUserInfoById(int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersService/GetUserInfoById", ReplyAction="http://tempuri.org/IUsersService/GetUserInfoByIdResponse")]
+        System.Threading.Tasks.Task<CoreServiceProxy.UsersServiceProxy.UserInfo> GetUserInfoByIdAsync(int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersService/GetUserInfoByLogin", ReplyAction="http://tempuri.org/IUsersService/GetUserInfoByLoginResponse")]
+        CoreServiceProxy.UsersServiceProxy.UserInfo GetUserInfoByLogin(string login);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersService/GetUserInfoByLogin", ReplyAction="http://tempuri.org/IUsersService/GetUserInfoByLoginResponse")]
+        System.Threading.Tasks.Task<CoreServiceProxy.UsersServiceProxy.UserInfo> GetUserInfoByLoginAsync(string login);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -398,6 +631,22 @@ namespace CoreServiceProxy.UsersServiceProxy {
         
         public System.Threading.Tasks.Task<bool> IsTasksAllowForUserAsync(int userId, int[] tasks) {
             return base.Channel.IsTasksAllowForUserAsync(userId, tasks);
+        }
+        
+        public CoreServiceProxy.UsersServiceProxy.UserInfo GetUserInfoById(int userId) {
+            return base.Channel.GetUserInfoById(userId);
+        }
+        
+        public System.Threading.Tasks.Task<CoreServiceProxy.UsersServiceProxy.UserInfo> GetUserInfoByIdAsync(int userId) {
+            return base.Channel.GetUserInfoByIdAsync(userId);
+        }
+        
+        public CoreServiceProxy.UsersServiceProxy.UserInfo GetUserInfoByLogin(string login) {
+            return base.Channel.GetUserInfoByLogin(login);
+        }
+        
+        public System.Threading.Tasks.Task<CoreServiceProxy.UsersServiceProxy.UserInfo> GetUserInfoByLoginAsync(string login) {
+            return base.Channel.GetUserInfoByLoginAsync(login);
         }
     }
 }

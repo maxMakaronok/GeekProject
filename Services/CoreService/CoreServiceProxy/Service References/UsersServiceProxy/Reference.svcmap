@@ -28,6 +28,7 @@
     <MetadataFile FileName="UsersService2.xsd" MetadataType="Schema" ID="9ae28ac4-9af4-4777-b1ef-0e9e5146e0dc" SourceId="1" SourceUrl="http://localhost:2908/UsersService.svc?xsd=xsd3" />
     <MetadataFile FileName="UsersService3.xsd" MetadataType="Schema" ID="74bb98ce-7378-4feb-baac-e0640743b686" SourceId="1" SourceUrl="http://localhost:2908/UsersService.svc?xsd=xsd2" />
     <MetadataFile FileName="UsersService.disco" MetadataType="Disco" ID="1f4351ac-bd73-4a45-ab10-9f5091776e8a" SourceId="1" SourceUrl="http://localhost:2908/UsersService.svc?disco" />
+    <MetadataFile FileName="UsersService4.xsd" MetadataType="Schema" ID="d3945b3e-3126-4028-897f-c254cacbb65e" SourceId="1" SourceUrl="http://localhost:2908/UsersService.svc?xsd=xsd4" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

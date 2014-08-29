@@ -6,6 +6,7 @@
       <xsd:import schemaLocation="http://localhost:2908/UsersService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:2908/UsersService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ServiceModels.RolesAndTasks" />
       <xsd:import schemaLocation="http://localhost:2908/UsersService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:2908/UsersService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/ServiceModels" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IUsersService_GetAllTasks_InputMessage">
@@ -68,6 +69,18 @@
   <wsdl:message name="IUsersService_IsTasksAllowForUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:IsTasksAllowForUserResponse" />
   </wsdl:message>
+  <wsdl:message name="IUsersService_GetUserInfoById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInfoById" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_GetUserInfoById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInfoByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_GetUserInfoByLogin_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInfoByLogin" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_GetUserInfoByLogin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserInfoByLoginResponse" />
+  </wsdl:message>
   <wsdl:portType name="IUsersService">
     <wsdl:operation name="GetAllTasks">
       <wsdl:input wsaw:Action="http://tempuri.org/IUsersService/GetAllTasks" message="tns:IUsersService_GetAllTasks_InputMessage" />
@@ -108,6 +121,14 @@
     <wsdl:operation name="IsTasksAllowForUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IUsersService/IsTasksAllowForUser" message="tns:IUsersService_IsTasksAllowForUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUsersService/IsTasksAllowForUserResponse" message="tns:IUsersService_IsTasksAllowForUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersService/GetUserInfoById" message="tns:IUsersService_GetUserInfoById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersService/GetUserInfoByIdResponse" message="tns:IUsersService_GetUserInfoById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByLogin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersService/GetUserInfoByLogin" message="tns:IUsersService_GetUserInfoByLogin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersService/GetUserInfoByLoginResponse" message="tns:IUsersService_GetUserInfoByLogin_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IUsersService" type="tns:IUsersService">
@@ -195,6 +216,24 @@
     </wsdl:operation>
     <wsdl:operation name="IsTasksAllowForUser">
       <soap:operation soapAction="http://tempuri.org/IUsersService/IsTasksAllowForUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoById">
+      <soap:operation soapAction="http://tempuri.org/IUsersService/GetUserInfoById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByLogin">
+      <soap:operation soapAction="http://tempuri.org/IUsersService/GetUserInfoByLogin" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

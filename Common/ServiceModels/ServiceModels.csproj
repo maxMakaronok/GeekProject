@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Error.cs" />
     <Compile Include="Extensions\SecurityExtensions.cs" />
+    <Compile Include="Extensions\UserExtensions.cs" />
     <Compile Include="LogFilter.cs" />
     <Compile Include="LogAddMessage.cs" />
     <Compile Include="LogGetMessage.cs" />
@@ -48,6 +50,7 @@
     <Compile Include="RolesAndTasks\RoleModel.cs" />
     <Compile Include="RolesAndTasks\RoleTasksModel.cs" />
     <Compile Include="RolesAndTasks\TaskModel.cs" />
+    <Compile Include="UserInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Database\Database\Database.csproj">

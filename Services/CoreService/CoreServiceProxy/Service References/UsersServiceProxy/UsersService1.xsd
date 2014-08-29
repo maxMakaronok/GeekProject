@@ -2,6 +2,7 @@
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:2908/UsersService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ServiceModels.RolesAndTasks" />
   <xs:import schemaLocation="http://localhost:2908/UsersService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://localhost:2908/UsersService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/ServiceModels" />
   <xs:element name="GetAllTasks">
     <xs:complexType>
       <xs:sequence />
@@ -138,6 +139,34 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="IsTasksAllowForUserResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserInfoById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="userId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserInfoByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ServiceModels" minOccurs="0" name="GetUserInfoByIdResult" nillable="true" type="q8:UserInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserInfoByLogin">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="login" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserInfoByLoginResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/ServiceModels" minOccurs="0" name="GetUserInfoByLoginResult" nillable="true" type="q9:UserInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

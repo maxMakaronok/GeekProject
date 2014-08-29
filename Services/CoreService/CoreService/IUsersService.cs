@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
 using Enums.Security;
+using ServiceModels;
 using ServiceModels.RolesAndTasks;
 
 namespace CoreService
@@ -38,11 +39,22 @@ namespace CoreService
         bool IsTaskAllowForUser(int userId, int task);
 
         [OperationContract]
-        bool IsTasksAllowForUser(int userId, List<int> tasks);
-
-     
-
+        bool IsTasksAllowForUser(int userId, List<int> tasks); 
         
-       
+        [OperationContract]
+        UserInfo GetUserInfoById(int userId);
+
+        [OperationContract]
+        UserInfo GetUserInfoByLogin(string login);
+
+        [OperationContract]
+        Error IsValid(string login, string password);
+
+
+
+
+
+
+
     }
 }
