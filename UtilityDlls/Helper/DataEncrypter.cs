@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Helper
 {
-    class DataEncrypter
+    public class DataEncrypter
     {
         /// <summary>
         /// Кодирует текст по формату Sha1
