@@ -136,8 +136,15 @@ namespace CacheManager
         /// <param name="name">Имя объекта в кэше</param>
         public static void RemoveCacheElement(string name)
         {
-            if (name != null)
-                Cache.Remove(name);
+            try
+            {
+                if (name != null)
+                    Cache.Remove(name);
+            }
+            catch 
+            {
+            }
+           
         }
 
         /// <summary>
@@ -146,7 +153,7 @@ namespace CacheManager
         /// <param name="name">Имя объекта в кэше</param>
         public static void RemoveCacheElement(CacheNameManager name)
         {
-            Cache.Remove(name.GetEnumText());
+            RemoveCacheElement(name.GetEnumText());
         }
 
         /// <summary>

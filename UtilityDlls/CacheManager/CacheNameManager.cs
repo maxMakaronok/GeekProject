@@ -7,14 +7,34 @@ namespace CacheManager
     /// </summary>
     public enum CacheNameManager
     {
-       #region LogService
+        #region LogService
 
         /// <summary>
         /// Список событий для логирования
         /// </summary>
-        [EnumText("Core_LogEventsList")]
-        Core_LogEventsList,
+        [EnumText("Log_LogEventsList")]
+        Log_LogEventsList,
 
         #endregion
+
+        #region CoreService
+        [EnumText("Core_AllTasks")]
+        Core_AllTasks,
+
+        [EnumText("Core_AllRoles")]
+        Core_AllRoles,
+
+        [EnumText("Core_AllRoleTasks")]
+        Core_AllRoleTasks,
+
+        [EnumText("Core_UserRoles")]
+        Core_UserRoles,
+
+        [EnumText("Core_UserTasks")]
+        Core_UserTasks,
+
+      
+        #endregion
+
     }
 }

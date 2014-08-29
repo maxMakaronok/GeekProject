@@ -17,6 +17,9 @@ namespace ServiceModels
         public int? ServiceId { get; set; }
 
         [DataMember]
+        public DateTime? EventDate { get; set; }
+
+        [DataMember]
         public int? Skip { get; set; }
 
         [DataMember]

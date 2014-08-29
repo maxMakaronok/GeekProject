@@ -30,5 +30,10 @@ namespace Database
         public DbSet<System_Services> System_Services { get; set; }
         public DbSet<System_Logs> System_Logs { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<RoleTask> RoleTasks { get; set; }
+        public DbSet<Task> Tasks { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<UserTask> UserTasks { get; set; }
     }
 }

@@ -42,6 +42,9 @@
     <Reference Include="EntityFramework">
       <HintPath>..\..\..\Database\Database\bin\Debug\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="EnumExtensions">
+      <HintPath>..\..\..\UtilityDlls\CacheManager\bin\Debug\EnumExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -84,9 +87,25 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\Enums\Enums.csproj">
+      <Project>{9875E142-8E8E-47A3-A26F-F7C1D78D60A4}</Project>
+      <Name>Enums</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Common\ServiceModels\ServiceModels.csproj">
+      <Project>{16C846D2-7294-45FE-A0C6-D18CB26E86DE}</Project>
+      <Name>ServiceModels</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Database\Database\Database.csproj">
       <Project>{511FF87F-816B-4E08-AD9E-34E87F09EBBF}</Project>
       <Name>Database %28Database\Database%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\UtilityDlls\CacheManager\CacheManager.csproj">
+      <Project>{4df944cc-6c3f-47b5-936c-a6e35d740d9f}</Project>
+      <Name>CacheManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\UtilityDlls\Helper\Helper.csproj">
+      <Project>{663236c0-9727-40c3-a757-91c4bed33ff9}</Project>
+      <Name>Helper</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

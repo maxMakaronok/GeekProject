@@ -6,11 +6,24 @@
     <edmx:StorageModels>
     <Schema Namespace="GeekModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="GeekModelStoreContainer">
+          <EntitySet Name="Roles" EntityType="GeekModel.Store.Roles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="RoleTasks" EntityType="GeekModel.Store.RoleTasks" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="sysdiagrams" EntityType="GeekModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="System_LogEvents" EntityType="GeekModel.Store.System_LogEvents" store:Type="Tables" Schema="dbo" Table="System.LogEvents" />
           <EntitySet Name="System_Logs" EntityType="GeekModel.Store.System_Logs" store:Type="Tables" Schema="dbo" Table="System.Logs" />
           <EntitySet Name="System_Services" EntityType="GeekModel.Store.System_Services" store:Type="Tables" Schema="dbo" Table="System.Services" />
+          <EntitySet Name="Tasks" EntityType="GeekModel.Store.Tasks" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserRoles" EntityType="GeekModel.Store.UserRoles" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Users" EntityType="GeekModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserTasks" EntityType="GeekModel.Store.UserTasks" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_RoleTasks_Roles" Association="GeekModel.Store.FK_RoleTasks_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="RoleTasks" EntitySet="RoleTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleTasks_Tasks" Association="GeekModel.Store.FK_RoleTasks_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="RoleTasks" EntitySet="RoleTasks" />
+          </AssociationSet>
           <AssociationSet Name="FK_System_Logs_System_LogEvents" Association="GeekModel.Store.FK_System_Logs_System_LogEvents">
             <End Role="System_LogEvents" EntitySet="System_LogEvents" />
             <End Role="System_Logs" EntitySet="System_Logs" />
@@ -23,7 +36,39 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="System_Logs" EntitySet="System_Logs" />
           </AssociationSet>
+          <AssociationSet Name="FK_UserRoles_Roles" Association="GeekModel.Store.FK_UserRoles_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRoles_Users" Association="GeekModel.Store.FK_UserRoles_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserRoles" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTasks_Tasks" Association="GeekModel.Store.FK_UserTasks_Tasks">
+            <End Role="Tasks" EntitySet="Tasks" />
+            <End Role="UserTasks" EntitySet="UserTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTasks_Users" Association="GeekModel.Store.FK_UserTasks_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserTasks" EntitySet="UserTasks" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="RoleTasks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="TaskId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -60,6 +105,22 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Tasks">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Name="TaskId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="UserRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="UserId" />
@@ -68,8 +129,49 @@
           <Property Name="FirstName" Type="nvarchar(max)" />
           <Property Name="LastName" Type="nvarchar(max)" />
           <Property Name="FullName" Type="nvarchar(max)" StoreGeneratedPattern="Computed" />
-          <Property Name="tempFieldLogin" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Login" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="isDeleted" Type="bit" Nullable="false" />
+          <Property Name="IsBLocked" Type="bit" Nullable="false" />
+          <Property Name="BlockDate" Type="datetime" />
+          <Property Name="BlockReason" Type="nvarchar(max)" />
+          <Property Name="ErrorPinCount" Type="int" Nullable="false" />
+          <Property Name="RegistrationDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLoginDate" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="UserTasks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="TaskId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_RoleTasks_Roles">
+          <End Role="Roles" Type="GeekModel.Store.Roles" Multiplicity="1" />
+          <End Role="RoleTasks" Type="GeekModel.Store.RoleTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="RoleTasks">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleTasks_Tasks">
+          <End Role="Tasks" Type="GeekModel.Store.Tasks" Multiplicity="1" />
+          <End Role="RoleTasks" Type="GeekModel.Store.RoleTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="RoleTasks">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_System_Logs_System_LogEvents">
           <End Role="System_LogEvents" Type="GeekModel.Store.System_LogEvents" Multiplicity="1" />
           <End Role="System_Logs" Type="GeekModel.Store.System_Logs" Multiplicity="*" />
@@ -106,6 +208,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserRoles_Roles">
+          <End Role="Roles" Type="GeekModel.Store.Roles" Multiplicity="1" />
+          <End Role="UserRoles" Type="GeekModel.Store.UserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRoles_Users">
+          <End Role="Users" Type="GeekModel.Store.Users" Multiplicity="1" />
+          <End Role="UserRoles" Type="GeekModel.Store.UserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTasks_Tasks">
+          <End Role="Tasks" Type="GeekModel.Store.Tasks" Multiplicity="1" />
+          <End Role="UserTasks" Type="GeekModel.Store.UserTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasks">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="UserTasks">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTasks_Users">
+          <End Role="Users" Type="GeekModel.Store.Users" Multiplicity="1" />
+          <End Role="UserTasks" Type="GeekModel.Store.UserTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserTasks">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -127,6 +277,35 @@
           <AssociationSet Name="FK_System_Logs_Users" Association="GeekModel.FK_System_Logs_Users">
             <End Role="User" EntitySet="Users" />
             <End Role="System_Logs" EntitySet="System_Logs" />
+          </AssociationSet>
+          <EntitySet Name="Roles" EntityType="GeekModel.Role" />
+          <EntitySet Name="RoleTasks" EntityType="GeekModel.RoleTask" />
+          <EntitySet Name="Tasks" EntityType="GeekModel.Task" />
+          <EntitySet Name="UserRoles" EntityType="GeekModel.UserRole" />
+          <EntitySet Name="UserTasks" EntityType="GeekModel.UserTask" />
+          <AssociationSet Name="FK_RoleTasks_Roles" Association="GeekModel.FK_RoleTasks_Roles">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="RoleTask" EntitySet="RoleTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRoles_Roles" Association="GeekModel.FK_UserRoles_Roles">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="UserRole" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoleTasks_Tasks" Association="GeekModel.FK_RoleTasks_Tasks">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="RoleTask" EntitySet="RoleTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTasks_Tasks" Association="GeekModel.FK_UserTasks_Tasks">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="UserTask" EntitySet="UserTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRoles_Users" Association="GeekModel.FK_UserRoles_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserRole" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserTasks_Users" Association="GeekModel.FK_UserTasks_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserTask" EntitySet="UserTasks" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="sysdiagram">
@@ -202,8 +381,19 @@
           <Property Type="String" Name="FirstName" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="LastName" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="FullName" MaxLength="Max" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
-          <Property Type="String" Name="tempFieldLogin" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="System_Logs" Relationship="GeekModel.FK_System_Logs_Users" FromRole="User" ToRole="System_Logs" />
+          <Property Type="String" Name="Login" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="isDeleted" Nullable="false" />
+          <Property Type="Boolean" Name="IsBLocked" Nullable="false" />
+          <Property Type="DateTime" Name="BlockDate" Precision="3" />
+          <Property Type="String" Name="BlockReason" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ErrorPinCount" Nullable="false" />
+          <Property Type="DateTime" Name="RegistrationDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="LastLoginDate" Nullable="false" Precision="3" />
+          <NavigationProperty Name="UserRoles" Relationship="GeekModel.FK_UserRoles_Users" FromRole="User" ToRole="UserRole" />
+          <NavigationProperty Name="UserTasks" Relationship="GeekModel.FK_UserTasks_Users" FromRole="User" ToRole="UserTask" />
         </EntityType>
         <Association Name="FK_System_Logs_Users">
           <End Type="GeekModel.User" Role="User" Multiplicity="1" />
@@ -213,6 +403,128 @@
               <PropertyRef Name="UserId" />
             </Principal>
             <Dependent Role="System_Logs">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Type="Int32" Name="RoleId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="RoleTasks" Relationship="GeekModel.FK_RoleTasks_Roles" FromRole="Role" ToRole="RoleTask" />
+          <NavigationProperty Name="UserRoles" Relationship="GeekModel.FK_UserRoles_Roles" FromRole="Role" ToRole="UserRole" />
+        </EntityType>
+        <EntityType Name="RoleTask">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="RoleId" Nullable="false" />
+          <Property Type="Int32" Name="TaskId" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="GeekModel.FK_RoleTasks_Roles" FromRole="RoleTask" ToRole="Role" />
+          <NavigationProperty Name="Task" Relationship="GeekModel.FK_RoleTasks_Tasks" FromRole="RoleTask" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="TaskId" />
+          </Key>
+          <Property Type="Int32" Name="TaskId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="RoleTasks" Relationship="GeekModel.FK_RoleTasks_Tasks" FromRole="Task" ToRole="RoleTask" />
+          <NavigationProperty Name="UserTasks" Relationship="GeekModel.FK_UserTasks_Tasks" FromRole="Task" ToRole="UserTask" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="Int32" Name="RoleId" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="GeekModel.FK_UserRoles_Roles" FromRole="UserRole" ToRole="Role" />
+          <NavigationProperty Name="User" Relationship="GeekModel.FK_UserRoles_Users" FromRole="UserRole" ToRole="User" />
+        </EntityType>
+        <EntityType Name="UserTask">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="Int32" Name="TaskId" Nullable="false" />
+          <NavigationProperty Name="Task" Relationship="GeekModel.FK_UserTasks_Tasks" FromRole="UserTask" ToRole="Task" />
+          <NavigationProperty Name="User" Relationship="GeekModel.FK_UserTasks_Users" FromRole="UserTask" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_RoleTasks_Roles">
+          <End Type="GeekModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="GeekModel.RoleTask" Role="RoleTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="RoleTask">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRoles_Roles">
+          <End Type="GeekModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="GeekModel.UserRole" Role="UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoleTasks_Tasks">
+          <End Type="GeekModel.Task" Role="Task" Multiplicity="1" />
+          <End Type="GeekModel.RoleTask" Role="RoleTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="RoleTask">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTasks_Tasks">
+          <End Type="GeekModel.Task" Role="Task" Multiplicity="1" />
+          <End Type="GeekModel.UserTask" Role="UserTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="TaskId" />
+            </Principal>
+            <Dependent Role="UserTask">
+              <PropertyRef Name="TaskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRoles_Users">
+          <End Type="GeekModel.User" Role="User" Multiplicity="1" />
+          <End Type="GeekModel.UserRole" Role="UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserTasks_Users">
+          <End Type="GeekModel.User" Role="User" Multiplicity="1" />
+          <End Type="GeekModel.UserTask" Role="UserTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserTask">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
@@ -266,11 +578,65 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="GeekModel.User">
               <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="tempFieldLogin" ColumnName="tempFieldLogin" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+                <ScalarProperty Name="ErrorPinCount" ColumnName="ErrorPinCount" />
+                <ScalarProperty Name="BlockReason" ColumnName="BlockReason" />
+                <ScalarProperty Name="BlockDate" ColumnName="BlockDate" />
+                <ScalarProperty Name="IsBLocked" ColumnName="IsBLocked" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="GeekModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleTasks">
+            <EntityTypeMapping TypeName="GeekModel.RoleTask">
+              <MappingFragment StoreEntitySet="RoleTasks">
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="GeekModel.Task">
+              <MappingFragment StoreEntitySet="Tasks">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="GeekModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRoles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTasks">
+            <EntityTypeMapping TypeName="GeekModel.UserTask">
+              <MappingFragment StoreEntitySet="UserTasks">
+                <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

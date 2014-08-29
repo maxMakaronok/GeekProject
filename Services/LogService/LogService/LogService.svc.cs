@@ -31,7 +31,7 @@ namespace LogService
         public void WriteLogMessage(LogAddMessage addMessage)
         {
             #region  Достаем все события из кэша
-            var logEvents = CacheHelper.GetCacheElement<List<System_LogEvents>>(CacheNameManager.Core_LogEventsList);
+            var logEvents = CacheHelper.GetCacheElement<List<System_LogEvents>>(CacheNameManager.Log_LogEventsList);
             if (logEvents == null)
             {
                 //Если в кэше нету лезем за ними в базу
@@ -39,7 +39,7 @@ namespace LogService
                 try
                 {
                     logEvents = _database.System_LogEvents.ToList();
-                    CacheHelper.SetCacheElement(CacheNameManager.Core_LogEventsList, logEvents, 30);
+                    CacheHelper.SetCacheElement(CacheNameManager.Log_LogEventsList, logEvents, 30);
                 }
                 catch (Exception)
                 {
@@ -96,6 +96,15 @@ namespace LogService
             if(filter.ServiceId.HasValue)
                 systemLogs = systemLogs.Where(p => p.ServiceId == filter.ServiceId.Value);
 
+            if (filter.EventDate.HasValue)
+            {
+                var startDate = filter.EventDate.Value;
+                var endDate = startDate.AddDays(1);
+
+                systemLogs = systemLogs.Where(p => p.EventDate>=startDate.Date &&
+                                                   p.EventDate <= endDate.Date);
+            }
+
             if (filter.Skip.HasValue)
                 systemLogs = systemLogs.Skip(filter.Skip.Value);
 
@@ -111,7 +120,7 @@ namespace LogService
                     EventDate = systemLog.EventDate,
                     ServiceName = systemLog.System_Services.Name,
                     Message = systemLog.Message,
-                    UserLogin = systemLog.User.tempFieldLogin
+                    UserLogin = systemLog.User.Email
                 }));
             }
             catch

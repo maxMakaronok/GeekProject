@@ -40,10 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\SecurityExtensions.cs" />
     <Compile Include="LogFilter.cs" />
     <Compile Include="LogAddMessage.cs" />
     <Compile Include="LogGetMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RolesAndTasks\RoleModel.cs" />
+    <Compile Include="RolesAndTasks\RoleTasksModel.cs" />
+    <Compile Include="RolesAndTasks\TaskModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Database\Database\Database.csproj">
@@ -55,9 +59,7 @@
       <Name>Enums</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Extensions\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

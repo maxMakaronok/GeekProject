@@ -13,6 +13,17 @@
         <AssociationConnector Association="GeekModel.FK_System_Logs_System_Services" />
         <EntityTypeShape EntityType="GeekModel.User" Width="1.5" PointX="4.5856343249723475" PointY="26.806173232759431" />
         <AssociationConnector Association="GeekModel.FK_System_Logs_Users" />
+        <EntityTypeShape EntityType="GeekModel.Role" Width="1.5" PointX="6.6270559125705883" PointY="8.47244084275907" />
+        <EntityTypeShape EntityType="GeekModel.RoleTask" Width="1.5" PointX="10.833853437953561" PointY="13.331259078034787" />
+        <EntityTypeShape EntityType="GeekModel.Task" Width="1.5" PointX="6.1422356637857085" PointY="22.154753278081657" />
+        <EntityTypeShape EntityType="GeekModel.UserRole" Width="1.5" PointX="7.1341367695173892" PointY="21.985215823159187" />
+        <EntityTypeShape EntityType="GeekModel.UserTask" Width="1.5" PointX="0.097570393279926115" PointY="12.499321585753616" />
+        <AssociationConnector Association="GeekModel.FK_RoleTasks_Roles" />
+        <AssociationConnector Association="GeekModel.FK_UserRoles_Roles" />
+        <AssociationConnector Association="GeekModel.FK_RoleTasks_Tasks" />
+        <AssociationConnector Association="GeekModel.FK_UserTasks_Tasks" />
+        <AssociationConnector Association="GeekModel.FK_UserRoles_Users" />
+        <AssociationConnector Association="GeekModel.FK_UserTasks_Users" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
