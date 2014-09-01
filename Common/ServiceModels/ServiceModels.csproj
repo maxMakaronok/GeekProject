@@ -43,6 +43,7 @@
     <Compile Include="Error.cs" />
     <Compile Include="Extensions\SecurityExtensions.cs" />
     <Compile Include="Extensions\UserExtensions.cs" />
+    <Compile Include="LogEventsForUpdate.cs" />
     <Compile Include="LogFilter.cs" />
     <Compile Include="LogAddMessage.cs" />
     <Compile Include="LogGetMessage.cs" />

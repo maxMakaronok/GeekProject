@@ -14,6 +14,11 @@ namespace LogService
         [OperationContract]
         List<LogGetMessage> GetLogs(LogFilter filter);
 
+        [OperationContract]
+        Error UpdateLogEvents(IEnumerable<LogEventsForUpdate> events);
+
+        [OperationContract]
+        IEnumerable<LogEventsForUpdate> GetLogEvents();
     }
 
 

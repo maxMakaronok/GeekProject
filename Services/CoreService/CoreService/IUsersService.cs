@@ -50,7 +50,20 @@ namespace CoreService
         [OperationContract]
         Error IsValid(string login, string password);
 
+        [OperationContract]
+        Error UpdateUserPersonalInfo(UserPersonalInfo newInfo);
 
+        [OperationContract]
+        Error RegistrateUser(string email);
+
+        [OperationContract]
+        Error BlockUser(int userId, string reason);
+
+        [OperationContract]
+        Error UnBlockUser(int userId);
+
+        [OperationContract]
+        Error DeleteUser(int userId);
 
 
 

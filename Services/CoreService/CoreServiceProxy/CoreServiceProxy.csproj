@@ -53,6 +53,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Service References\UsersServiceProxy\CoreServiceProxy.UsersServiceProxy.Error.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\UsersServiceProxy\CoreServiceProxy.UsersServiceProxy.RoleModel.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

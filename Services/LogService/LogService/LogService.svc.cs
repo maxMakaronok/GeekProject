@@ -105,11 +105,18 @@ namespace LogService
                                                    p.EventDate <= endDate.Date);
             }
 
+            if (!string.IsNullOrEmpty(filter.Login))
+                systemLogs = systemLogs.Where(p => p.User.Login.Contains(filter.Login) || 
+                                                   p.User.Email.Contains(filter.Login));
+
             if (filter.Skip.HasValue)
                 systemLogs = systemLogs.Skip(filter.Skip.Value);
 
             if (filter.Take.HasValue)
                 systemLogs = systemLogs.Take(filter.Take.Value);
+
+
+
 
             try
             {
@@ -128,6 +135,58 @@ namespace LogService
                
             }
             return messages;
+        }
+
+        public Error UpdateLogEvents(IEnumerable<LogEventsForUpdate> events)
+        {
+            if (events != null)
+            {
+                var systemLogEvents = _database.System_LogEvents.ToArray();
+
+                foreach (var updateEvent in events)
+                {
+                    var oldEvent = systemLogEvents.FirstOrDefault(p => p.Id == updateEvent.EventId);
+                    if (oldEvent == null) continue;
+                    oldEvent.EventName = updateEvent.Name;
+                    oldEvent.EnableLog = updateEvent.IsEnable;
+                }
+                try
+                {
+                    _database.SaveChanges();
+                }
+                catch (Exception)
+                {
+                   return new Error(){Message = "Ошибка обновления событий журнала"};
+                }
+
+            }
+            return Error.Ok;
+        }
+
+        public IEnumerable<LogEventsForUpdate> GetLogEvents()
+        {
+            var logEvents = CacheHelper.GetCacheElement<List<System_LogEvents>>(CacheNameManager.Log_LogEventsList);
+            if (logEvents == null)
+            {
+                //Если в кэше нету лезем за ними в базу
+                try
+                {
+                    logEvents = _database.System_LogEvents.ToList();
+                    CacheHelper.SetCacheElement(CacheNameManager.Log_LogEventsList, logEvents, 30);
+                }
+                catch (Exception)
+                {
+                }
+            }
+            if(logEvents!=null)
+                  return logEvents.Select(p => new LogEventsForUpdate
+                                                                {
+                                                                    EventId = p.Id, 
+                                                                    Name = p.EventName, 
+                                                                    IsEnable = p.EnableLog
+                                                                }).ToArray();
+
+            return null;
         }
     }
 }

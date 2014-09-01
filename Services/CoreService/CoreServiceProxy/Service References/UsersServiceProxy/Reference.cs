@@ -449,6 +449,176 @@ namespace CoreServiceProxy.UsersServiceProxy {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Error", Namespace="http://schemas.datacontract.org/2004/07/ServiceModels")]
+    [System.SerializableAttribute()]
+    public partial class Error : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Code {
+            get {
+                return this.CodeField;
+            }
+            set {
+                if ((this.CodeField.Equals(value) != true)) {
+                    this.CodeField = value;
+                    this.RaisePropertyChanged("Code");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="UserPersonalInfo", Namespace="http://schemas.datacontract.org/2004/07/ServiceModels")]
+    [System.SerializableAttribute()]
+    public partial class UserPersonalInfo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FirstNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LastNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LoginField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PasswordField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int UserIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FirstName {
+            get {
+                return this.FirstNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FirstNameField, value) != true)) {
+                    this.FirstNameField = value;
+                    this.RaisePropertyChanged("FirstName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LastName {
+            get {
+                return this.LastNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LastNameField, value) != true)) {
+                    this.LastNameField = value;
+                    this.RaisePropertyChanged("LastName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Login {
+            get {
+                return this.LoginField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LoginField, value) != true)) {
+                    this.LoginField = value;
+                    this.RaisePropertyChanged("Login");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Password {
+            get {
+                return this.PasswordField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
+                    this.PasswordField = value;
+                    this.RaisePropertyChanged("Password");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int UserId {
+            get {
+                return this.UserIdField;
+            }
+            set {
+                if ((this.UserIdField.Equals(value) != true)) {
+                    this.UserIdField = value;
+                    this.RaisePropertyChanged("UserId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="UsersServiceProxy.IUsersService")]
     public interface IUsersService {
@@ -524,6 +694,42 @@ namespace CoreServiceProxy.UsersServiceProxy {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersService/GetUserInfoByLogin", ReplyAction="http://tempuri.org/IUsersService/GetUserInfoByLoginResponse")]
         System.Threading.Tasks.Task<CoreServiceProxy.UsersServiceProxy.UserInfo> GetUserInfoByLoginAsync(string login);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersService/IsValid", ReplyAction="http://tempuri.org/IUsersService/IsValidResponse")]
+        CoreServiceProxy.UsersServiceProxy.Error IsValid(string login, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersService/IsValid", ReplyAction="http://tempuri.org/IUsersService/IsValidResponse")]
+        System.Threading.Tasks.Task<CoreServiceProxy.UsersServiceProxy.Error> IsValidAsync(string login, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersService/UpdateUserPersonalInfo", ReplyAction="http://tempuri.org/IUsersService/UpdateUserPersonalInfoResponse")]
+        CoreServiceProxy.UsersServiceProxy.Error UpdateUserPersonalInfo(CoreServiceProxy.UsersServiceProxy.UserPersonalInfo newInfo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersService/UpdateUserPersonalInfo", ReplyAction="http://tempuri.org/IUsersService/UpdateUserPersonalInfoResponse")]
+        System.Threading.Tasks.Task<CoreServiceProxy.UsersServiceProxy.Error> UpdateUserPersonalInfoAsync(CoreServiceProxy.UsersServiceProxy.UserPersonalInfo newInfo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersService/RegistrateUser", ReplyAction="http://tempuri.org/IUsersService/RegistrateUserResponse")]
+        CoreServiceProxy.UsersServiceProxy.Error RegistrateUser(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersService/RegistrateUser", ReplyAction="http://tempuri.org/IUsersService/RegistrateUserResponse")]
+        System.Threading.Tasks.Task<CoreServiceProxy.UsersServiceProxy.Error> RegistrateUserAsync(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersService/BlockUser", ReplyAction="http://tempuri.org/IUsersService/BlockUserResponse")]
+        CoreServiceProxy.UsersServiceProxy.Error BlockUser(int userId, string reason);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersService/BlockUser", ReplyAction="http://tempuri.org/IUsersService/BlockUserResponse")]
+        System.Threading.Tasks.Task<CoreServiceProxy.UsersServiceProxy.Error> BlockUserAsync(int userId, string reason);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersService/UnBlockUser", ReplyAction="http://tempuri.org/IUsersService/UnBlockUserResponse")]
+        CoreServiceProxy.UsersServiceProxy.Error UnBlockUser(int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersService/UnBlockUser", ReplyAction="http://tempuri.org/IUsersService/UnBlockUserResponse")]
+        System.Threading.Tasks.Task<CoreServiceProxy.UsersServiceProxy.Error> UnBlockUserAsync(int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersService/DeleteUser", ReplyAction="http://tempuri.org/IUsersService/DeleteUserResponse")]
+        CoreServiceProxy.UsersServiceProxy.Error DeleteUser(int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUsersService/DeleteUser", ReplyAction="http://tempuri.org/IUsersService/DeleteUserResponse")]
+        System.Threading.Tasks.Task<CoreServiceProxy.UsersServiceProxy.Error> DeleteUserAsync(int userId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -647,6 +853,54 @@ namespace CoreServiceProxy.UsersServiceProxy {
         
         public System.Threading.Tasks.Task<CoreServiceProxy.UsersServiceProxy.UserInfo> GetUserInfoByLoginAsync(string login) {
             return base.Channel.GetUserInfoByLoginAsync(login);
+        }
+        
+        public CoreServiceProxy.UsersServiceProxy.Error IsValid(string login, string password) {
+            return base.Channel.IsValid(login, password);
+        }
+        
+        public System.Threading.Tasks.Task<CoreServiceProxy.UsersServiceProxy.Error> IsValidAsync(string login, string password) {
+            return base.Channel.IsValidAsync(login, password);
+        }
+        
+        public CoreServiceProxy.UsersServiceProxy.Error UpdateUserPersonalInfo(CoreServiceProxy.UsersServiceProxy.UserPersonalInfo newInfo) {
+            return base.Channel.UpdateUserPersonalInfo(newInfo);
+        }
+        
+        public System.Threading.Tasks.Task<CoreServiceProxy.UsersServiceProxy.Error> UpdateUserPersonalInfoAsync(CoreServiceProxy.UsersServiceProxy.UserPersonalInfo newInfo) {
+            return base.Channel.UpdateUserPersonalInfoAsync(newInfo);
+        }
+        
+        public CoreServiceProxy.UsersServiceProxy.Error RegistrateUser(string email) {
+            return base.Channel.RegistrateUser(email);
+        }
+        
+        public System.Threading.Tasks.Task<CoreServiceProxy.UsersServiceProxy.Error> RegistrateUserAsync(string email) {
+            return base.Channel.RegistrateUserAsync(email);
+        }
+        
+        public CoreServiceProxy.UsersServiceProxy.Error BlockUser(int userId, string reason) {
+            return base.Channel.BlockUser(userId, reason);
+        }
+        
+        public System.Threading.Tasks.Task<CoreServiceProxy.UsersServiceProxy.Error> BlockUserAsync(int userId, string reason) {
+            return base.Channel.BlockUserAsync(userId, reason);
+        }
+        
+        public CoreServiceProxy.UsersServiceProxy.Error UnBlockUser(int userId) {
+            return base.Channel.UnBlockUser(userId);
+        }
+        
+        public System.Threading.Tasks.Task<CoreServiceProxy.UsersServiceProxy.Error> UnBlockUserAsync(int userId) {
+            return base.Channel.UnBlockUserAsync(userId);
+        }
+        
+        public CoreServiceProxy.UsersServiceProxy.Error DeleteUser(int userId) {
+            return base.Channel.DeleteUser(userId);
+        }
+        
+        public System.Threading.Tasks.Task<CoreServiceProxy.UsersServiceProxy.Error> DeleteUserAsync(int userId) {
+            return base.Channel.DeleteUserAsync(userId);
         }
     }
 }

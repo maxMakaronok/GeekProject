@@ -81,6 +81,42 @@
   <wsdl:message name="IUsersService_GetUserInfoByLogin_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetUserInfoByLoginResponse" />
   </wsdl:message>
+  <wsdl:message name="IUsersService_IsValid_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsValid" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_IsValid_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsValidResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_UpdateUserPersonalInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserPersonalInfo" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_UpdateUserPersonalInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserPersonalInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_RegistrateUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegistrateUser" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_RegistrateUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegistrateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_BlockUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:BlockUser" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_BlockUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BlockUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_UnBlockUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnBlockUser" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_UnBlockUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnBlockUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_DeleteUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUser" />
+  </wsdl:message>
+  <wsdl:message name="IUsersService_DeleteUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserResponse" />
+  </wsdl:message>
   <wsdl:portType name="IUsersService">
     <wsdl:operation name="GetAllTasks">
       <wsdl:input wsaw:Action="http://tempuri.org/IUsersService/GetAllTasks" message="tns:IUsersService_GetAllTasks_InputMessage" />
@@ -129,6 +165,30 @@
     <wsdl:operation name="GetUserInfoByLogin">
       <wsdl:input wsaw:Action="http://tempuri.org/IUsersService/GetUserInfoByLogin" message="tns:IUsersService_GetUserInfoByLogin_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUsersService/GetUserInfoByLoginResponse" message="tns:IUsersService_GetUserInfoByLogin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsValid">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersService/IsValid" message="tns:IUsersService_IsValid_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersService/IsValidResponse" message="tns:IUsersService_IsValid_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserPersonalInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersService/UpdateUserPersonalInfo" message="tns:IUsersService_UpdateUserPersonalInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersService/UpdateUserPersonalInfoResponse" message="tns:IUsersService_UpdateUserPersonalInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegistrateUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersService/RegistrateUser" message="tns:IUsersService_RegistrateUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersService/RegistrateUserResponse" message="tns:IUsersService_RegistrateUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BlockUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersService/BlockUser" message="tns:IUsersService_BlockUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersService/BlockUserResponse" message="tns:IUsersService_BlockUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UnBlockUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersService/UnBlockUser" message="tns:IUsersService_UnBlockUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersService/UnBlockUserResponse" message="tns:IUsersService_UnBlockUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUsersService/DeleteUser" message="tns:IUsersService_DeleteUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUsersService/DeleteUserResponse" message="tns:IUsersService_DeleteUser_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IUsersService" type="tns:IUsersService">
@@ -234,6 +294,60 @@
     </wsdl:operation>
     <wsdl:operation name="GetUserInfoByLogin">
       <soap:operation soapAction="http://tempuri.org/IUsersService/GetUserInfoByLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsValid">
+      <soap:operation soapAction="http://tempuri.org/IUsersService/IsValid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserPersonalInfo">
+      <soap:operation soapAction="http://tempuri.org/IUsersService/UpdateUserPersonalInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegistrateUser">
+      <soap:operation soapAction="http://tempuri.org/IUsersService/RegistrateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BlockUser">
+      <soap:operation soapAction="http://tempuri.org/IUsersService/BlockUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UnBlockUser">
+      <soap:operation soapAction="http://tempuri.org/IUsersService/UnBlockUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <soap:operation soapAction="http://tempuri.org/IUsersService/DeleteUser" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

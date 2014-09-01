@@ -25,5 +25,8 @@ namespace ServiceModels
         [DataMember]
         public int? Take { get; set; }
 
+        [DataMember]
+        public string Login { get; set; }
+
     }
 }

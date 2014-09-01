@@ -2,7 +2,7 @@
 
 namespace Helper
 {
-    class RandomGenerator
+    public class RandomGenerator
     {
         private static readonly Random Random = new Random(DateTime.Now.Millisecond);
         private const String CharArray = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_";

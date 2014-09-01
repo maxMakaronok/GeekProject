@@ -19,6 +19,18 @@
   <wsdl:message name="ILogService_GetLogs_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetLogsResponse" />
   </wsdl:message>
+  <wsdl:message name="ILogService_UpdateLogEvents_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateLogEvents" />
+  </wsdl:message>
+  <wsdl:message name="ILogService_UpdateLogEvents_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateLogEventsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ILogService_GetLogEvents_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLogEvents" />
+  </wsdl:message>
+  <wsdl:message name="ILogService_GetLogEvents_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLogEventsResponse" />
+  </wsdl:message>
   <wsdl:portType name="ILogService">
     <wsdl:operation name="WriteLogMessage">
       <wsdl:input wsaw:Action="http://tempuri.org/ILogService/WriteLogMessage" message="tns:ILogService_WriteLogMessage_InputMessage" />
@@ -27,6 +39,14 @@
     <wsdl:operation name="GetLogs">
       <wsdl:input wsaw:Action="http://tempuri.org/ILogService/GetLogs" message="tns:ILogService_GetLogs_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILogService/GetLogsResponse" message="tns:ILogService_GetLogs_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLogEvents">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILogService/UpdateLogEvents" message="tns:ILogService_UpdateLogEvents_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILogService/UpdateLogEventsResponse" message="tns:ILogService_UpdateLogEvents_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLogEvents">
+      <wsdl:input wsaw:Action="http://tempuri.org/ILogService/GetLogEvents" message="tns:ILogService_GetLogEvents_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ILogService/GetLogEventsResponse" message="tns:ILogService_GetLogEvents_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ILogService" type="tns:ILogService">
@@ -42,6 +62,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetLogs">
       <soap:operation soapAction="http://tempuri.org/ILogService/GetLogs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLogEvents">
+      <soap:operation soapAction="http://tempuri.org/ILogService/UpdateLogEvents" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLogEvents">
+      <soap:operation soapAction="http://tempuri.org/ILogService/GetLogEvents" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

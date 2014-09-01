@@ -14,6 +14,7 @@ using LogServiceProxy.LogService;
 using ServiceModels;
 using ServiceModels.Extensions;
 using ServiceModels.RolesAndTasks;
+using Error = ServiceModels.Error;
 
 namespace CoreService
 {
@@ -191,7 +192,137 @@ namespace CoreService
             if (user.isDeleted)
                 return new Error { Code = 4, Message = "Пользователь был удален из системы" };
 
+
+            user.RegistrationDate = DateTime.Now;
+            try
+            {
+                _database.SaveChanges();
+            }
+            catch (Exception)
+            {
+               //logi
+                throw;
+            }
             return Error.Ok;
+        }
+
+        public Error UpdateUserPersonalInfo(UserPersonalInfo newInfo)
+        {
+            var user = _database.Users.FirstOrDefault(p => p.UserId == newInfo.UserId);
+            if (user.ReturnSuccess())
+            {
+                user.FirstName = newInfo.FirstName;
+                user.LastName = newInfo.LastName;
+                user.Login = user.Login;
+                user.Password = DataEncrypter.EncryptSha1(newInfo.Password);
+
+                try
+                {
+                    _database.SaveChanges();
+                    return Error.Ok;
+                }
+                catch (Exception)
+                {
+                    return new Error(){Message = "Ошибка сохранения пользователя."};
+                }
+            }
+            return new Error() { Message = "Ошибка сохранения пользователя. Пользователь отсутствует в системе" };
+        }
+
+        public Error RegistrateUser(string email)
+        {
+            //generate password
+            var password = RandomGenerator.Generate();
+
+            new User()
+                {
+                    Email = email,
+                    Password = DataEncrypter.EncryptSha1(password),
+                    RegistrationDate = DateTime.Now
+                };
+
+            try
+            {
+                _database.SaveChanges();
+            }
+            catch (Exception)
+            {
+              //log
+                return new Error(){Message = "Ошибка создания пользователя"};
+            }
+            string err;
+            MailSender.SendEmailMessage(email, "Zapis.by", "Password - > " + password, out err);
+            if(!string.IsNullOrEmpty(err))
+                return new Error() { Message = "Ошибка создания пользователя. Ошибка отправки на почту клиента" };
+
+            //назначить роли и таски по умолчанию
+
+
+            return Error.Ok;
+        }
+
+        public Error BlockUser(int userId, string reason)
+        {
+            var user = _database.Users.FirstOrDefault(p => p.UserId == userId);
+            if (user.ReturnSuccess())
+            {
+                user.IsBLocked = true;
+                user.BlockReason = reason;
+                user.BlockDate = DateTime.Now;
+
+                try
+                {
+                    _database.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    return new Error() { Message = "Ошибка блокировки пользователя. Доступ к базе" };
+                    throw;
+                }
+            }
+            return new Error() { Message = "Ошибка блокировки пользователя. Пользователь отсутствует в системе" };
+        }
+
+        public Error UnBlockUser(int userId)
+        {
+            var user = _database.Users.FirstOrDefault(p => p.UserId == userId);
+            if (user.ReturnSuccess())
+            {
+                user.IsBLocked = false;
+                user.BlockReason = null;
+                user.BlockDate =null;
+
+                try
+                {
+                    _database.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    return new Error() { Message = "Ошибка разблокировки пользователя. Доступ к базе" };
+                    throw;
+                }
+            }
+            return new Error() { Message = "Ошибка разблокировки пользователя. Пользователь отсутствует в системе" };
+        }
+
+        public Error DeleteUser(int userId)
+        {
+            var user = _database.Users.FirstOrDefault(p => p.UserId == userId);
+            if (user.ReturnSuccess())
+            {
+                user.isDeleted = true;
+
+                try
+                {
+                    _database.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    return new Error() { Message = "Ошибка удаления пользователя. Доступ к базе" };
+                    throw;
+                }
+            }
+            return new Error() { Message = "Ошибка удаления пользователя. Пользователь отсутствует в системе" };
         }
 
         public void UpdateUserRolesAndTask(int userId,List<int> newRoles, List<int> newTasks)

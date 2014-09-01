@@ -14,6 +14,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="EventDate" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="EventId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Login" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ServiceId" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="Skip" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="Take" nillable="true" type="xs:int" />
@@ -37,4 +38,25 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="LogGetMessage" nillable="true" type="tns:LogGetMessage" />
+  <xs:complexType name="ArrayOfLogEventsForUpdate">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LogEventsForUpdate" nillable="true" type="tns:LogEventsForUpdate" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLogEventsForUpdate" nillable="true" type="tns:ArrayOfLogEventsForUpdate" />
+  <xs:complexType name="LogEventsForUpdate">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EventId" type="xs:int" />
+      <xs:element minOccurs="0" name="IsEnable" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LogEventsForUpdate" nillable="true" type="tns:LogEventsForUpdate" />
+  <xs:complexType name="Error">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Code" type="xs:int" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Error" nillable="true" type="tns:Error" />
 </xs:schema>

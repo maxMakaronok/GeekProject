@@ -63,6 +63,12 @@
     <None Include="Service References\LogService\LogService2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\LogService\LogServiceProxy.LogService.Error.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\LogService\LogServiceProxy.LogService.LogEventsForUpdate.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\LogService\LogServiceProxy.LogService.LogGetMessage.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

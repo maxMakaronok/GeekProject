@@ -138,6 +138,9 @@ namespace LogServiceProxy.LogService {
         private System.Nullable<int> EventIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LoginField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> ServiceIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -178,6 +181,19 @@ namespace LogServiceProxy.LogService {
                 if ((this.EventIdField.Equals(value) != true)) {
                     this.EventIdField = value;
                     this.RaisePropertyChanged("EventId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Login {
+            get {
+                return this.LoginField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LoginField, value) != true)) {
+                    this.LoginField = value;
+                    this.RaisePropertyChanged("Login");
                 }
             }
         }
@@ -356,6 +372,144 @@ namespace LogServiceProxy.LogService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="LogEventsForUpdate", Namespace="http://schemas.datacontract.org/2004/07/ServiceModels")]
+    [System.SerializableAttribute()]
+    public partial class LogEventsForUpdate : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int EventIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsEnableField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int EventId {
+            get {
+                return this.EventIdField;
+            }
+            set {
+                if ((this.EventIdField.Equals(value) != true)) {
+                    this.EventIdField = value;
+                    this.RaisePropertyChanged("EventId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsEnable {
+            get {
+                return this.IsEnableField;
+            }
+            set {
+                if ((this.IsEnableField.Equals(value) != true)) {
+                    this.IsEnableField = value;
+                    this.RaisePropertyChanged("IsEnable");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Error", Namespace="http://schemas.datacontract.org/2004/07/ServiceModels")]
+    [System.SerializableAttribute()]
+    public partial class Error : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Code {
+            get {
+                return this.CodeField;
+            }
+            set {
+                if ((this.CodeField.Equals(value) != true)) {
+                    this.CodeField = value;
+                    this.RaisePropertyChanged("Code");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="LogService.ILogService")]
     public interface ILogService {
@@ -371,6 +525,18 @@ namespace LogServiceProxy.LogService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILogService/GetLogs", ReplyAction="http://tempuri.org/ILogService/GetLogsResponse")]
         System.Threading.Tasks.Task<LogServiceProxy.LogService.LogGetMessage[]> GetLogsAsync(LogServiceProxy.LogService.LogFilter filter);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILogService/UpdateLogEvents", ReplyAction="http://tempuri.org/ILogService/UpdateLogEventsResponse")]
+        LogServiceProxy.LogService.Error UpdateLogEvents(LogServiceProxy.LogService.LogEventsForUpdate[] events);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILogService/UpdateLogEvents", ReplyAction="http://tempuri.org/ILogService/UpdateLogEventsResponse")]
+        System.Threading.Tasks.Task<LogServiceProxy.LogService.Error> UpdateLogEventsAsync(LogServiceProxy.LogService.LogEventsForUpdate[] events);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILogService/GetLogEvents", ReplyAction="http://tempuri.org/ILogService/GetLogEventsResponse")]
+        LogServiceProxy.LogService.LogEventsForUpdate[] GetLogEvents();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILogService/GetLogEvents", ReplyAction="http://tempuri.org/ILogService/GetLogEventsResponse")]
+        System.Threading.Tasks.Task<LogServiceProxy.LogService.LogEventsForUpdate[]> GetLogEventsAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -414,6 +580,22 @@ namespace LogServiceProxy.LogService {
         
         public System.Threading.Tasks.Task<LogServiceProxy.LogService.LogGetMessage[]> GetLogsAsync(LogServiceProxy.LogService.LogFilter filter) {
             return base.Channel.GetLogsAsync(filter);
+        }
+        
+        public LogServiceProxy.LogService.Error UpdateLogEvents(LogServiceProxy.LogService.LogEventsForUpdate[] events) {
+            return base.Channel.UpdateLogEvents(events);
+        }
+        
+        public System.Threading.Tasks.Task<LogServiceProxy.LogService.Error> UpdateLogEventsAsync(LogServiceProxy.LogService.LogEventsForUpdate[] events) {
+            return base.Channel.UpdateLogEventsAsync(events);
+        }
+        
+        public LogServiceProxy.LogService.LogEventsForUpdate[] GetLogEvents() {
+            return base.Channel.GetLogEvents();
+        }
+        
+        public System.Threading.Tasks.Task<LogServiceProxy.LogService.LogEventsForUpdate[]> GetLogEventsAsync() {
+            return base.Channel.GetLogEventsAsync();
         }
     }
 }

@@ -27,4 +27,30 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="UpdateLogEvents">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ServiceModels" minOccurs="0" name="events" nillable="true" type="q4:ArrayOfLogEventsForUpdate" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateLogEventsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ServiceModels" minOccurs="0" name="UpdateLogEventsResult" nillable="true" type="q5:Error" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLogEvents">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLogEventsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ServiceModels" minOccurs="0" name="GetLogEventsResult" nillable="true" type="q6:ArrayOfLogEventsForUpdate" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
